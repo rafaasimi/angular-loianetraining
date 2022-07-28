@@ -1,0 +1,103 @@
+<!-- <section>
+
+    <article>
+        <h3>Interpolação</h3>
+        <p>String renderizada com interpolação: {{ url }}</p>
+        <p>Resultado de 1 + 1 é: {{ 1 + 1 }}</p>
+        <p>Resultado de 1 + 1 não é: {{ 1 + 1 + getValor() }}</p>
+        <p>Curso Angular e estou curtindo o curso de Angular: {{ cursoAngular && getCurtirCurso() }}</p>
+    </article>
+
+    <article>
+        <h3>Property Binding</h3>
+        <img src="{{ urlImagem }}" />
+        <img [src]="urlImagem" />
+    </article>
+
+    <article>
+        <h3>Class e Style Binding</h3>
+        <p>Selecione uma classe</p>
+        <select #classe (change)="0">
+            <optgroup label="Alertas">
+                <option value="alert-success">Sucesso</option>
+                <option value="alert-info">Info</option>
+                <option value="alert-warning">Alerta</option>
+                <option value="alert-danger">Erro</option>
+            </optgroup>
+        </select>
+        <br><br>
+
+        <div class="alert {{ classe.value }}" role="alert">
+            Texto colorido conforme o valor do combobox
+        </div>
+
+        <div class="alert" [class.alert-success]="classe.value == 'alert-success'" role="alert">
+            A simple success alert—check it out!
+        </div>
+        <div class="alert" [class.alert-info]="classe.value == 'alert-info'" role="alert">
+            A simple info alert—check it out!
+        </div>
+        <div class="alert" [class.alert-warning]="classe.value == 'alert-warning'" role="alert">
+            A simple warning alert—check it out!
+        </div>
+        <div class="alert" [class.alert-danger]="classe.value == 'alert-danger'" role="alert">
+            A simple danger alert—check it out!
+        </div>
+
+        <div class="alert alert-danger" [style.display]="classe.value == 'alert-danger' ? 'block' : 'none'" role="alert">
+            Esse texto somente aparece em caso de erro.
+        </div>
+
+    </article>
+
+</section> -->
+ 
+<!-- <section>
+
+    <article>
+        <h3>Event Binding</h3>
+
+        <div>
+            <button class="btn btn-primary" (click)="botaoClicado()">Me clique!</button>
+            <br><br>
+
+            <input type="text"
+                (keyup)="onKeyUp($event)"
+                (keyup.enter)="salvarValor(campoInput.value)"
+                (blur)="salvarValor(campoInput.value)"
+                #campoInput
+                >
+
+            <p>Valor atual: {{ valorAtual }}</p>
+            <p>Valor salvo: {{ valorSalvo }}</p>
+
+            <br><br>
+
+            <span 
+                (mouseover)="onMouseOverOut()"
+                (mouseout)="onMouseOverOut()"
+                [class.highlight]="isMouseOver"
+                >
+                Passe o mouse sobre mim 😏
+            </span>
+        </div>
+    </article>
+
+</section> -->
+
+<section>
+
+    <article>
+        <h3>Two-way data binding</h3>
+
+        <div>
+
+            <input type="text" 
+                [(ngModel)]="nome"
+            />
+
+            <p>Você digitou o nome: {{ nome }}</p>
+        </div>
+    </article>
+
+</section>

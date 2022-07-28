@@ -1,0 +1,17 @@
+<h1>
+    Classe com Class Binding
+    <br>
+    <i [class.bi-star]="!meuFavorito" [class.bi-star-fill]="meuFavorito" (click)="onFavoritar()">
+    </i>
+</h1>
+
+<h1>
+    Classe com Diretiva ngClass
+    <br>
+    <i [ngClass]="{
+            'bi-star': !meuFavorito,
+            'bi-star-fill': meuFavorito
+        }"
+        (click)="onFavoritar()">
+    </i>
+</h1>
