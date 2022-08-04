@@ -1,0 +1,25 @@
+<h3>Exemplos de Pipes</h3>
+
+<!-- Transforma o texto todo com letras maiusculas -->
+<!-- Depois aplica nossa pipe customizada para transformar em CamelCase -->
+<p>Título: {{ livro.titulo | uppercase | camelCase}}</p>
+
+<!-- Transforma o texto em numero e como parametro definimos a quantidade de casas -->
+<!-- 2: numero de casas a esquerda | 1-2: minimo 1 e maximo 2 numeros a direira -->
+<p>Estrelas: {{ livro.rating | number:'2.1-2' }}</p>
+
+<!-- Transforma o texto em numero (não há mudança visivel) -->
+<p>Páginas: {{ livro.numeroPaginas | number}}</p>
+
+<!-- Transforma o numero em moeda, o padrão é dolar $ -->
+<p>Preço: {{ livro.preco | currency:'BRL' }}</p>
+
+<!-- Transforma o texto em data, o padrão é americano -->
+<p>Data Lançamento: {{ livro.dataLancamento | date:'dd/MM/yyyy' }}</p>
+
+<p>URL: {{ livro.url }}</p>
+
+<br>
+
+<!-- Transforma a exibição do objeto em um texto json -->
+<p>Livro: {{ livro | json}}</p>
