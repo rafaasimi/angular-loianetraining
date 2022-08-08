@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { interval, Observable, timer } from 'rxjs';
+
 @Component({
   selector: 'app-exemplos-pipes',
   templateUrl: './exemplos-pipes.component.html',
@@ -14,6 +16,33 @@ export class ExemplosPipesComponent implements OnInit {
     dataLancamento: new Date(2016, 5, 23),
     url: 'http://rafaelsimionato.dev',
   };
+
+  livros: string[] = ['Angular', 'React', 'VueJS'];
+  filtro: any ;
+
+  addCurso(valor: any) {
+    this.livros.push(valor)
+  }
+
+  obterCursos() {
+    if(this.livros.length === 0 || this.filtro === undefined || this.filtro.trim() === '') {
+      return this.livros
+    }
+
+    return this.livros.filter((v) => {
+      if(v.toLowerCase().indexOf(this.filtro.toLowerCase()) >= 0) {
+        return true
+      }
+      return false
+    })
+  }
+
+  valorAsync = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('Valor assíncrono')
+    }, 2000)
+  })
+
 
   constructor() {}
 

@@ -15,7 +15,7 @@
 <p>Preço: {{ livro.preco | currency:'BRL' }}</p>
 
 <!-- Transforma o texto em data, o padrão é americano -->
-<p>Data Lançamento: {{ livro.dataLancamento | date:'dd/MM/yyyy' }}</p>
+<p>Data Lançamento: {{ livro.dataLancamento | date }}</p>
 
 <p>URL: {{ livro.url }}</p>
 
@@ -23,3 +23,35 @@
 
 <!-- Transforma a exibição do objeto em um texto json -->
 <p>Livro: {{ livro | json}}</p>
+
+<input type="text" placeholder="Buscar curso..." [(ngModel)]="filtro">
+
+<br><br>
+
+<input type="text" placeholder="Novo curso" #novoValor>
+
+<button (click)="addCurso(novoValor.value)">Add</button>
+
+<h3>Pipe Puro</h3>
+<ul>
+    <li *ngFor="let livro of livros | filtroArray:filtro">
+        {{ livro }}
+    </li>
+</ul>
+
+<h3>Pipe Impuro</h3>
+<ul>
+    <li *ngFor="let livro of livros | filtroArrayImpuro:filtro">
+        {{ livro }}
+    </li>
+</ul>
+
+<!-- <h3>Maneira correta de usar filtro nos projetos</h3>
+<ul>
+    <li *ngFor="let livro of obterCursos() | filtroArrayImpuro:filtro">
+        {{ livro }}
+    </li>
+</ul> -->
+
+<h3>Utilizando Pipe Async</h3>
+<p>{{ valorAsync | json }}</p>
