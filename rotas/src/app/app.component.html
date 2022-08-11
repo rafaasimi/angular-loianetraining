@@ -1,7 +1,28 @@
-<ul>
-  <li><a href="/">Home</a></li>
-  <li><a href="cursos">Cursos</a></li>
-  <li><a href="login">Login</a></li>
-</ul>
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>Rotas</span>
 
-<router-outlet></router-outlet>
+    <span class="example-spacer"></span>
+
+    <a routerLink="/">
+      <mat-icon routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="example-icon" aria-hidden="false" aria-label="Home">home</mat-icon>
+    </a>
+    <a routerLink="/cursos">
+      <mat-icon routerLinkActive="active" class="example-icon" aria-hidden="false" aria-label="Cursos">school</mat-icon>
+    </a>
+    <a routerLink="curso/{{id}}">
+      <mat-icon routerLinkActive="active" class="example-icon" aria-hidden="false" aria-label="Login">star</mat-icon>
+    </a>
+    <a routerLink="/login">
+      <mat-icon routerLinkActive="active" class="example-icon" aria-hidden="false" aria-label="Login">login</mat-icon>
+    </a>
+
+  </mat-toolbar-row>
+</mat-toolbar>
+
+<div class="container">
+  <p>Entre com o ID do Curso</p>
+  <input type="text" [(ngModel)]="id">
+  
+  <router-outlet></router-outlet>
+</div>

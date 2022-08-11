@@ -1,0 +1,17 @@
+a {
+  color: inherit;
+}
+.example-icon {
+  padding: 0 14px;
+}
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+mat-icon {
+  padding: 5px;
+}
+mat-icon.active {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+}
