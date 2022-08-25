@@ -7,7 +7,7 @@
     <a routerLink="/">
       <mat-icon routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="example-icon" aria-hidden="false" aria-label="Home">home</mat-icon>
     </a>
-    <a routerLink="/cursos">
+    <a routerLink="/cursos" [queryParams]="{pagina:1}">
       <mat-icon routerLinkActive="active" class="example-icon" aria-hidden="false" aria-label="Cursos">school</mat-icon>
     </a>
     <a routerLink="curso/{{id}}">
@@ -21,8 +21,8 @@
 </mat-toolbar>
 
 <div class="container">
-  <p>Entre com o ID do Curso</p>
-  <input type="text" [(ngModel)]="id">
+  <!-- <p>Entre com o ID do Curso</p>
+  <input type="text" [(ngModel)]="id"> -->
   
   <router-outlet></router-outlet>
 </div>
