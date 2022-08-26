@@ -4,7 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
+
 import { CursosModule } from './cursos/cursos.module';
+import { AlunosModule } from './alunos/alunos.module';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -25,10 +27,17 @@ const MODULES = [
   MatIconModule,
   MatTableModule,
   CursosModule,
-]
+  AlunosModule
+];
+
+const COMPONENTS = [
+  AppComponent,
+  HomeComponent,
+  LoginComponent
+];
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent, LoginComponent],
+  declarations: [COMPONENTS],
   imports: [MODULES],
   providers: [],
   bootstrap: [AppComponent],

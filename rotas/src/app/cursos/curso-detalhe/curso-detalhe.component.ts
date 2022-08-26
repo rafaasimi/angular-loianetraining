@@ -27,7 +27,7 @@ export class CursoDetalheComponent implements OnInit {
     this.curso = this.cursosService.getCurso(Number(this.id))
 
     if(this.curso == null) {
-      this.router.navigate(['/404'])
+      this.router.navigate(['/naoEncontrado'])
     }
   }
 
