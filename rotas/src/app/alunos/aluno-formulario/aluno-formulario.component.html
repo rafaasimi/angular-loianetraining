@@ -1,1 +1,18 @@
-<p>aluno-formulario works!</p>
+<h2>Criar/Editar Aluno</h2>
+
+<div class="formulario">
+    <mat-form-field appearance="fill">
+        <mat-label>ID</mat-label>
+        <input matInput disabled [(ngModel)]="aluno.id">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Nome</mat-label>
+        <input matInput [(ngModel)]="aluno.nome">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>E-mail</mat-label>
+        <input matInput [(ngModel)]="aluno.email">
+    </mat-form-field>
+</div>

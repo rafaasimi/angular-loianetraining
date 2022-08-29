@@ -1,0 +1,14 @@
+table {
+    width: 100%;
+  }
+  
+  a {
+    color: inherit;
+  }
+  
+
+  ::ng-deep mat-grid-tile div.mat-grid-tile-content {
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+  }
