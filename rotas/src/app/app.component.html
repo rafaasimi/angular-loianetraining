@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">
+<mat-toolbar color="primary" *ngIf="mostrarMenu">
   <mat-toolbar-row>
     <span>Rotas</span>
 
@@ -19,8 +19,6 @@
     <a routerLink="/login">
       <mat-icon routerLinkActive="active" class="example-icon" aria-hidden="false" aria-label="Login">login</mat-icon>
     </a>
-
-
   </mat-toolbar-row>
 </mat-toolbar>
 
