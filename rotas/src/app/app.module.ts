@@ -19,6 +19,8 @@ import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './login/auth.service';
 import { AuthGuard } from './guards/auth-guard';
+import { CursosGuard } from './guards/cursos-guard';
+import { AlunosGuard } from './guards/alunos-guard';
 
 // import { CursosModule } from './cursos/cursos.module';
 // import { AlunosModule } from './alunos/alunos.module';
@@ -41,10 +43,12 @@ const MODULES = [
 
 const COMPONENTS = [AppComponent, HomeComponent, LoginComponent];
 
+const PROVIDERS = [AuthService, AuthGuard, CursosGuard, AlunosGuard]
+
 @NgModule({
   declarations: [COMPONENTS],
   imports: [MODULES],
-  providers: [AuthService, AuthGuard],
+  providers: [PROVIDERS],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

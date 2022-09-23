@@ -11,6 +11,7 @@ import { AlunosService } from '../alunos.service';
 export class AlunoFormularioComponent implements OnInit, OnDestroy {
   aluno: any = {};
   inscricao: Subscription = new Subscription();
+  private formMudou: boolean = false;
 
   constructor(
     private alunoService: AlunosService,
@@ -31,5 +32,24 @@ export class AlunoFormularioComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.inscricao.unsubscribe();
+  }
+
+  onInput() {
+    this.formMudou = true;
+  }
+
+  podeMudarRota() {
+    
+    if(this.formMudou) {
+      const result = confirm('Existem dados que podem ser perdidos. Gostaria mesmo de trocar de página?')
+
+      if(result) {
+        return true
+      }
+
+      return false;
+    }
+
+    return true;
   }
 }
