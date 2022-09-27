@@ -2,19 +2,21 @@ import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanDeactivate, RouterStateSnapshot } from "@angular/router";
 import { Observable } from "rxjs";
 
-import { AlunoFormularioComponent } from "../alunos/aluno-formulario/aluno-formulario.component";
+export interface IFormCanDeactivate {
+  podeDesativar(): any;
+}
 
 @Injectable()
-export class AlunosDeativateGuard  implements CanDeactivate<AlunoFormularioComponent> {
+export class AlunosDeativateGuard  implements CanDeactivate<IFormCanDeactivate> {
 
   canDeactivate(
-    component: AlunoFormularioComponent,
+    component: IFormCanDeactivate,
     currentRoute: ActivatedRouteSnapshot,
     currentState: RouterStateSnapshot,
     nextState: RouterStateSnapshot
   ): Observable<boolean>|Promise<boolean>|boolean {
     console.log('Caí no canDeactivate')
 
-    return component.podeMudarRota();
+    return component.podeDesativar();
   }
 }  

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { IFormCanDeactivate } from 'src/app/guards/alunos-deactivate-guard';
 import { AlunosService } from '../alunos.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { AlunosService } from '../alunos.service';
   templateUrl: './aluno-formulario.component.html',
   styleUrls: ['./aluno-formulario.component.scss'],
 })
-export class AlunoFormularioComponent implements OnInit, OnDestroy {
+
+export class AlunoFormularioComponent implements OnInit, OnDestroy, IFormCanDeactivate {
   aluno: any = {};
   inscricao: Subscription = new Subscription();
   private formMudou: boolean = false;
@@ -42,14 +44,17 @@ export class AlunoFormularioComponent implements OnInit, OnDestroy {
     
     if(this.formMudou) {
       const result = confirm('Existem dados que podem ser perdidos. Gostaria mesmo de trocar de página?')
-
+      
       if(result) {
         return true
       }
-
       return false;
     }
 
     return true;
+  }
+
+  podeDesativar() {
+    return this.podeMudarRota()
   }
 }

@@ -15,6 +15,7 @@ import { AlunoDetalheComponent } from './aluno-detalhe/aluno-detalhe.component';
 import { AlunosRoutingModule } from './alunos-routing.module';
 import { AlunosService } from './alunos.service';
 import { AlunosDeativateGuard } from '../guards/alunos-deactivate-guard';
+import { AlunoDetalheResolver } from './guards/aluno-detalhe.resolver';
 
 const COMPONENTS = [
   AlunosComponent,
@@ -33,7 +34,7 @@ const MODULES = [
   MatButtonModule,
 ];
 
-const SERVICES = [AlunosService, AlunosDeativateGuard];
+const SERVICES = [AlunosService, AlunosDeativateGuard, AlunoDetalheResolver];
 
 @NgModule({
   declarations: [COMPONENTS],
