@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { TemplateFormComponent } from './template-form.component';
 import { FormDebugComponent } from '../form-debug/form-debug.component';
+import { CampoControlErroComponent } from '../campo-control-erro/campo-control-erro.component';
 
 const MODULES = [CommonModule, FormsModule];
-const COMPONENTS = [TemplateFormComponent, FormDebugComponent];
+const COMPONENTS = [TemplateFormComponent, FormDebugComponent, CampoControlErroComponent];
 
 @NgModule({
   declarations: [COMPONENTS],
