@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-template-form',
   templateUrl: './template-form.component.html',
@@ -20,6 +21,8 @@ export class TemplateFormComponent implements OnInit {
 
   onSubmit(form) {
     console.log(form)
+    this.http.post('/enderecoServer/formUsuario', JSON.stringify(form.value))
+    .subscribe(response => console.log(response))
   }
 
   verificaValidTouched(campo) {
