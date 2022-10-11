@@ -1,0 +1,9 @@
+.actions {
+    display: flex;
+    gap: 16px;
+
+    button {
+        flex: 1;
+        max-width: 100px;
+    }
+}
