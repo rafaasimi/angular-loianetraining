@@ -2,27 +2,122 @@
 
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
         
-        <div class="form-group row">
-            <div class="col-sm-12">
-                <label for="nome">Nome</label>
-                <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Nome"
-                    formControlName="nome"
-                >
+        <div formGroupName="dadosPessoais">
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="nome">Nome</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Nome"
+                        formControlName="nome"
+                        [ngClass]="aplicaCssErro('dadosPessoais.nome')"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('dadosPessoais.nome')" msgErro="O nome é obrigatório."></app-campo-control-erro>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        class="form-control" 
+                        placeholder="E-mail" 
+                        formControlName="email"
+                        [ngClass]="aplicaCssErro('dadosPessoais.email')"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('dadosPessoais.email')" msgErro="O e-mail é obrigatório."></app-campo-control-erro>
+                    <app-campo-control-erro [mostrarErro]="verificaEmailInvalido()" msgErro="O e-mail é inválido."></app-campo-control-erro>
+                </div>
             </div>
         </div>
 
-       <div class="form-group row">
-            <div class="col-sm-12">
-                <label for="email">Email</label>
-                <input 
-                    type="email" 
-                    class="form-control" 
-                    placeholder="E-mail" 
-                    formControlName="email" 
-                >
+
+        <div formGroupName="endereco">
+            <div class="form-group row">
+                <div class="col-md-3">
+                    <label for="cep">CEP</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="CEP"
+                        formControlName="cep"
+                        [ngClass]="aplicaCssErro('endereco.cep')"
+                        (blur)="consultaCEP()"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.cep')" msgErro="O CEP é inválido."></app-campo-control-erro>
+                </div>
+
+                <div class="col-md-3">
+                    <label for="numero">Número</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Número"
+                        formControlName="numero"
+                        [ngClass]="aplicaCssErro('endereco.numero')"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.numero')" msgErro="O número é obrigatório."></app-campo-control-erro>
+                </div>
+
+                <div class="col-md-6">
+                    <label for="complemento">Complemento</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Complemento"
+                        formControlName="complemento"
+                    >
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-12">
+                    <label for="rua">Rua</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="rua"
+                        [ngClass]="aplicaCssErro('endereco.rua')"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.rua')" msgErro="A rua é obrigatória."></app-campo-control-erro>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <div class="col-sm-5">
+                    <label for="bairro">Bairro</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="bairro"
+                        [ngClass]="aplicaCssErro('endereco.bairro')"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.bairro')" msgErro="O bairro é obrigatório."></app-campo-control-erro>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="cidade">Cidade</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="cidade"
+                        [ngClass]="aplicaCssErro('endereco.cidade')"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.cidade')" msgErro="A cidade é obrigatória."></app-campo-control-erro>
+                </div>
+
+                <div class="col-sm-3">
+                    <label for="estado">Estado</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        formControlName="estado"
+                        [ngClass]="aplicaCssErro('endereco.estado')"
+                    >
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.estado')" msgErro="O estado é obrigatório."></app-campo-control-erro>
+                </div>
             </div>
         </div>
 
