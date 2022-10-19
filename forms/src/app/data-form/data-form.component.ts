@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Observable } from 'rxjs';
 import { Estados } from '../shared/models/estados.model';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
 
 @Component({
@@ -11,9 +13,16 @@ import { DropdownService } from '../shared/services/dropdown.service';
 })
 export class DataFormComponent implements OnInit {
   formulario: FormGroup;
-  estados: Estados[];
+  // estados: Estados[];
+  estados: Observable<Estados[]>;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private dropDownService: DropdownService) {}
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private dropDownService: DropdownService,
+    private cepService: ConsultaCepService
+    ) {}
 
   ngOnInit(): void {
     // 1ª FORMA DE CRIAR FORMULARIO
@@ -43,8 +52,7 @@ export class DataFormComponent implements OnInit {
       })
     });
 
-    this.dropDownService.getEstadosBr()
-    .subscribe(dados => console.log(dados))
+    this.estados = this.dropDownService.getEstadosBr();
 
   }
 
@@ -102,22 +110,11 @@ export class DataFormComponent implements OnInit {
   consultaCEP() {
     let cep = this.formulario.get('endereco.cep').value;
 
-    // Limpa tudo o que for caracter deixando apenas numeros
-    cep = cep.replace(/\D/g, '')
-
-    // Verifica se a variável CEP possuí valor
-    if(cep != '') {
-      // Regex para validar CEP
-      let validacep = /^[0-9]{8}$/
-      
-      // Valida o formato do CEP
-      if(validacep.test(cep)){
-        this.resetaDadosForm();
-        
-        this.http.get(`https://viacep.com.br/ws/${cep}/json/`)
-        .subscribe(dados => this.popularDadosForm(dados))
-      }
+    if(cep != null && cep !== '') {
+      this.cepService.consultaCEP(cep)
+      .subscribe(dados => this.popularDadosForm(dados))
     }
+
   }
 
   popularDadosForm(dados) {
