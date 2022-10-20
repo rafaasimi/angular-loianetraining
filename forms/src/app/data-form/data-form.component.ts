@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { Observable } from 'rxjs';
 import { Estados } from '../shared/models/estados.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
@@ -17,8 +18,10 @@ export class DataFormComponent implements OnInit {
   estados: Observable<Estados[]>;
   cargos: any[];
   tecnologias: any[];
+  newsletterOptions: any[];
 
   constructor(
+    private title: Title,
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private dropDownService: DropdownService,
@@ -26,6 +29,7 @@ export class DataFormComponent implements OnInit {
     ) {}
 
   ngOnInit(): void {
+    this.title.setTitle('Formulários Reativos')
     // 1ª FORMA DE CRIAR FORMULARIO
     // this.formulario = new FormGroup({
     //   nome: new FormControl('Rafael'),
@@ -52,13 +56,15 @@ export class DataFormComponent implements OnInit {
         estado: [null, Validators.required]
       }),
       cargo: [null],
-      tecnologias: [null]
+      tecnologias: [null],
+      newsletter: [null],
+      termos: [null, Validators.pattern('true')]
     });
 
     this.estados = this.dropDownService.getEstadosBr();
-
     this.cargos = this.dropDownService.getCargos();
     this.tecnologias = this.dropDownService.getTecnologias();
+    this.newsletterOptions = this.dropDownService.getNewsletter();
 
   }
 

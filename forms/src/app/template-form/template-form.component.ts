@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 
 
@@ -15,9 +16,10 @@ export class TemplateFormComponent implements OnInit {
     email: ''
   }
 
-  constructor(private http: HttpClient, private cepService: ConsultaCepService) { }
+  constructor(private http: HttpClient, private cepService: ConsultaCepService, private title: Title) { }
 
   ngOnInit(): void {
+    this.title.setTitle('Formulários Template Driven')
   }
 
   onSubmit(form) {
