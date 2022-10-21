@@ -166,6 +166,7 @@
 
         <div class="form-group row">
             <div class="col-md-3">
+                <label>Termos de uso</label>
                 <div class="form-check">
                     <input
                         class="form-check-input"
@@ -178,6 +179,30 @@
                       Aceito os termos e condições
                     </label>
                     <app-campo-control-erro [mostrarErro]="verificaValidTouched('termos')" msgErro="É necessário aceitar os termos."></app-campo-control-erro>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <Label>Frameworks</Label>
+                <div class="form-check">
+                    <div class="row">
+                        <div
+                            class="col-sm-4"
+                            formArrayName="frameworks"
+                            *ngFor="let item of formulario.get('frameworks')['controls']; let i = index"
+                        >
+                            <input
+                                class="form-check-input"
+                                type="checkbox" 
+                                [id]="frameworks[i]"
+                                [ngClass]="aplicaCssErro('frameworks')"
+                                [formControlName]="i"
+                            >
+                            <label class="form-check-label" [for]="frameworks[i]">
+                                {{frameworks[i]}}
+                            </label>
+                        </div>
+                    </div>
                 </div>
                 
             </div>

@@ -19,6 +19,7 @@ export class DataFormComponent implements OnInit {
   cargos: any[];
   tecnologias: any[];
   newsletterOptions: any[];
+  frameworks = ['Angular', 'React', 'Vue', 'Sencha'];
 
   constructor(
     private title: Title,
@@ -58,7 +59,8 @@ export class DataFormComponent implements OnInit {
       cargo: [null],
       tecnologias: [null],
       newsletter: [null],
-      termos: [null, Validators.pattern('true')]
+      termos: [null, Validators.pattern('true')],
+      frameworks: this.buildFrameworks()
     });
 
     this.estados = this.dropDownService.getEstadosBr();
@@ -68,8 +70,21 @@ export class DataFormComponent implements OnInit {
 
   }
 
+  buildFrameworks() {
+    const values = this.frameworks.map(value => new FormControl(false))
+    return this.formBuilder.array(values);
+  }
+
   onSubmit() {
-    console.log(this.formulario.value);
+
+    let valueSubmit = Object.assign({}, this.formulario.value)
+    valueSubmit = Object.assign({
+      frameworks: valueSubmit.frameworks
+      .map((value, index) => value ? this.frameworks[index] : null)
+      .filter(value => value !== null)
+    })
+
+    console.log(valueSubmit)
 
     if(this.formulario.valid) {
       this.http
@@ -86,6 +101,8 @@ export class DataFormComponent implements OnInit {
     } else {
       this.verificaValidacoesForm(this.formulario);
     }
+
+    
    
   }
 
