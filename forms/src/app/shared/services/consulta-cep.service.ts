@@ -15,7 +15,7 @@ export class ConsultaCepService {
     // Verifica se a variável CEP possuí valor
     if (cep != '') {
       // Regex para validar CEP
-      let validacep = /^[0-9]{8}$/;
+      let validacep = /^[0-9]{8}$|^[0-9]{5}-[0-9]{3}$/;
 
       // Valida o formato do CEP
       if (validacep.test(cep)) {
