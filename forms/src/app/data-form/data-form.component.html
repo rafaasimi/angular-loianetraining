@@ -3,7 +3,18 @@
 <form [formGroup]="formulario" (ngSubmit)="onSubmit()">
         
         <div formGroupName="dadosPessoais">
-            <div class="form-group row">
+
+            <app-input-field 
+                formControlName="nome"
+                [classeCss]="aplicaCssErro('dadosPessoais.nome')"
+                id="nome"
+                [label]="'Nome'"
+                placeholder="Nome"
+                [control]="formulario.get('dadosPessoais.nome')"
+            >
+            </app-input-field>
+
+            <!-- <div class="form-group row">
                 <div class="col-sm-12">
                     <label for="nome">Nome</label>
                     <input
@@ -15,7 +26,7 @@
                     >
                     <app-error-msg [control]="formulario.get('dadosPessoais.nome')" label="Nome"></app-error-msg>
                 </div>
-            </div>
+            </div> -->
 
             <div class="form-group row">
                 <div class="col-sm-12">
