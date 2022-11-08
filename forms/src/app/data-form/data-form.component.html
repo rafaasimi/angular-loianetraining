@@ -62,7 +62,6 @@
                         placeholder="CEP"
                         formControlName="cep"
                         [ngClass]="aplicaCssErro('endereco.cep')"
-                        (blur)="consultaCEP()"
                     >
                     <app-campo-control-erro [mostrarErro]="verificaRequired('endereco.cep')" msgErro="O CEP é obrigatório."></app-campo-control-erro>
                     <app-campo-control-erro [mostrarErro]="formulario.get('endereco.cep').hasError('cepInvalido')" msgErro="O CEP é inválido."></app-campo-control-erro>
