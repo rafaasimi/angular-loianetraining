@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { empty, Observable } from 'rxjs';
+import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { FormValidations } from '../shared/form-validations';
 import { Estados } from '../shared/models/estados.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
@@ -75,6 +75,16 @@ export class DataFormComponent implements OnInit {
     this.tecnologias = this.dropDownService.getTecnologias();
     this.newsletterOptions = this.dropDownService.getNewsletter();
 
+    this.formulario.get('endereco.cep').statusChanges
+    .pipe(
+      distinctUntilChanged(),
+      tap(value => console.log('Status CEP', value)),
+      switchMap(status => status === 'VALID' ? 
+      this.cepService.consultaCEP(this.formulario.get('endereco.cep').value)
+      : empty()
+      )
+    )
+    .subscribe(dados => dados ? this.popularDadosForm(dados) : {});
   }
 
   buildFrameworks() {
@@ -90,8 +100,6 @@ export class DataFormComponent implements OnInit {
       .map((value, index) => value ? this.frameworks[index] : null)
       .filter(value => value !== null)
     })
-
-    console.log(this.formulario)
 
     if(this.formulario.valid) {
       this.http
@@ -109,8 +117,6 @@ export class DataFormComponent implements OnInit {
       this.verificaValidacoesForm(this.formulario);
     }
 
-    
-   
   }
 
   // Percorre todos os FormGroups e seus controles
