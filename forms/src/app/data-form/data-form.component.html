@@ -13,7 +13,7 @@
                         formControlName="nome"
                         [ngClass]="aplicaCssErro('dadosPessoais.nome')"
                     >
-                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('dadosPessoais.nome')" msgErro="O nome é obrigatório."></app-campo-control-erro>
+                    <app-error-msg [control]="formulario.get('dadosPessoais.nome')" label="Nome"></app-error-msg>
                 </div>
             </div>
 
