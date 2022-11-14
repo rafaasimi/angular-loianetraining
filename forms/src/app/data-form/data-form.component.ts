@@ -11,6 +11,7 @@ import { empty, Observable } from 'rxjs';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
 import { FormValidations } from '../shared/form-validations';
+import { Cidade } from '../shared/models/cidade.model';
 import { Estados } from '../shared/models/estados.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from '../shared/services/dropdown.service';
@@ -22,9 +23,10 @@ import { VerificaEmailService } from './services/verifica-email.service';
   styleUrls: ['./data-form.component.scss'],
 })
 export class DataFormComponent extends BaseFormComponent implements OnInit {
-  // formulario: FormGroup;
-  // estados: Estados[];
-  estados: Observable<Estados[]>;
+  formulario: FormGroup;
+  estados: Estados[];
+  cidades: Cidade[];
+  // estados: Observable<Estados[]>;
   cargos: any[];
   tecnologias: any[];
   newsletterOptions: any[];
@@ -96,7 +98,10 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
       frameworks: this.buildFrameworks(),
     });
 
-    this.estados = this.dropDownService.getEstadosBr();
+    // this.estados = this.dropDownService.getEstadosBr();
+    this.dropDownService.getEstadosBr()
+    .subscribe(dados => this.estados = dados);
+
     this.cargos = this.dropDownService.getCargos();
     this.tecnologias = this.dropDownService.getTecnologias();
     this.newsletterOptions = this.dropDownService.getNewsletter();
@@ -115,6 +120,17 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
         )
       )
       .subscribe((dados) => (dados ? this.popularDadosForm(dados) : {}));
+
+    // this.dropDownService.getCidades(8).subscribe(console.log);
+    this.formulario.get('endereco.estado').valueChanges
+    .pipe(
+      tap(estado => console.log('Novo estado:', estado)),
+      map(estado => this.estados.filter(e => e.sigla === estado)),
+      map(estados => estados && estados.length > 0 ? estados[0].id : empty()),
+      switchMap((estadoId: number) => this.dropDownService.getCidades(estadoId)),
+      tap(console.log)
+    ).subscribe(cidades => this.cidades = cidades);
+
   }
 
   buildFrameworks() {
@@ -159,6 +175,7 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
           Object.keys(dados).length > 0 ? this.popularDadosForm(dados) : null
         );
     }
+
   }
 
   popularDadosForm(dados) {

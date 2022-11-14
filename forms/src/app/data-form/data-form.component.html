@@ -126,17 +126,6 @@
                     <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.bairro')" msgErro="O bairro é obrigatório."></app-campo-control-erro>
                 </div>
 
-                <div class="col-sm-4">
-                    <label for="cidade">Cidade</label>
-                    <input
-                        type="text"
-                        class="form-control"
-                        formControlName="cidade"
-                        [ngClass]="aplicaCssErro('endereco.cidade')"
-                    >
-                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.cidade')" msgErro="A cidade é obrigatória."></app-campo-control-erro>
-                </div>
-
                 <div class="col-sm-3">
                     <label for="estado">Estado</label>
                     <select
@@ -145,9 +134,22 @@
                         formControlName="estado"
                         [ngClass]="aplicaCssErro('endereco.estado')"
                     >
-                        <option *ngFor="let estado of estados | async" [value]="estado.sigla">{{estado.nome}}</option>
+                        <option *ngFor="let estado of estados" [value]="estado.sigla">{{estado.nome}}</option>
                     </select>
                     <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.estado')" msgErro="O estado é obrigatório."></app-campo-control-erro>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="cidade">Cidade</label>
+                    <select
+                        type="text"
+                        class="form-control"
+                        formControlName="cidade"
+                        [ngClass]="aplicaCssErro('endereco.cidade')"
+                    >
+                        <option *ngFor="let cidade of cidades" [value]="cidade.nome">{{cidade.nome}}</option>
+                    </select>
+                    <app-campo-control-erro [mostrarErro]="verificaValidTouched('endereco.cidade')" msgErro="A cidade é obrigatória."></app-campo-control-erro>
                 </div>
             </div>
         </div>
