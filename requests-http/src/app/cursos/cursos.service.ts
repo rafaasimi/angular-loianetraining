@@ -20,6 +20,10 @@ export class CursosService {
     )
   }
 
+  loadByID(id: string) {
+    return this.http.get(`${this.API}/${id}`).pipe(take(1));
+  }
+
   create(curso: string) {
     return this.http.post(this.API, curso).pipe(take(1))
   }
