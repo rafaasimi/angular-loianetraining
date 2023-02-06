@@ -37,9 +37,6 @@ export class CursosFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    
-
     // this.route.params.subscribe(
     //   (params: any) => {
     //     const id = params['id'];
@@ -49,17 +46,15 @@ export class CursosFormComponent implements OnInit {
     //     )
     //   }
     // )
-
     // this.route.params
     //   .pipe(
     //     map((params): any => params['id']),
     //     switchMap((id) => this.cursosService.loadByID(id))
     //   )
     //   .subscribe((curso) => this.updateForm(curso));
-
-      // concatMap => Ordem da requisição importa, as requisições são feitas simultaneamente, mas a resposta é na ordem em que foi declarada
-      // mergeMap => Ordem da requisição não importa e o retorno é baseado na que terminou primeiro
-      // exhaustMap => Executa a primeira requisição, aguarda a resposta para seguir para o proximo
+    // concatMap => Ordem da requisição importa, as requisições são feitas simultaneamente, mas a resposta é na ordem em que foi declarada
+    // mergeMap => Ordem da requisição não importa e o retorno é baseado na que terminou primeiro
+    // exhaustMap => Executa a primeira requisição, aguarda a resposta para seguir para o proximo
   }
 
   // updateForm(curso: any) {
@@ -77,18 +72,59 @@ export class CursosFormComponent implements OnInit {
     this.submitted = true;
 
     if (this.form.valid) {
-      this.cursosService.create(this.form.value).subscribe(
-        (success) => {
-          this.alertModalService.showAlertSuccess('Curso criado com sucesso.');
-          this.location.back();
-        },
-        (error) => {
-          this.alertModalService.showAlertDanger(
-            'Erro ao criar curso, tente novamente.'
-          );
-        },
-        () => console.log('Request completo')
-      );
+
+      let messageSuccess = 'Curso criado com sucesso.';
+      let messageError = 'Erro ao criar curso, tente novamente.'
+
+      if (this.form.value.id) {
+        messageSuccess = 'Curso atualizado com sucesso.';
+        messageError = 'Erro ao atualizar curso, tente novamente.'
+      }
+        this.cursosService.save(this.form.value).subscribe(
+          (sucesso) => {
+            this.alertModalService.showAlertSuccess(
+              messageSuccess
+            );
+            this.location.back();
+          },
+          (error) => {
+            this.alertModalService.showAlertDanger(
+              messageError
+            );
+          }
+        );
+
+      // if (this.form.value.id) {
+      //   this.cursosService.update(this.form.value).subscribe(
+      //     (success) => {
+      //       this.alertModalService.showAlertSuccess(
+      //         'Curso atualizado com sucesso.'
+      //       );
+      //       this.location.back();
+      //     },
+      //     (error) => {
+      //       this.alertModalService.showAlertDanger(
+      //         'Erro ao atualizar curso, tente novamente.'
+      //       );
+      //     },
+      //     () => console.log('Update completo')
+      //   );
+      // } else {
+      //   this.cursosService.create(this.form.value).subscribe(
+      //     (success) => {
+      //       this.alertModalService.showAlertSuccess(
+      //         'Curso criado com sucesso.'
+      //       );
+      //       this.location.back();
+      //     },
+      //     (error) => {
+      //       this.alertModalService.showAlertDanger(
+      //         'Erro ao criar curso, tente novamente.'
+      //       );
+      //     },
+      //     () => console.log('Request completo')
+      //   );
+      // }
     }
   }
 
