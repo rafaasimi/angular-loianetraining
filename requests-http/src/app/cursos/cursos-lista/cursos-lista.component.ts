@@ -56,7 +56,7 @@ export class CursosListaComponent implements OnInit {
     this.alertService.showAlertDanger('Erro ao carregar cursos. Tente novamente mais tarde.');
   }
 
-  onEdit(id: number) {
+  onEdit(id: number | null) {
     this.router.navigate(['editar', id], {relativeTo: this.route})
   }
   

@@ -2,7 +2,6 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { map, switchMap } from 'rxjs';
 import { AlertModalServiceService } from 'src/app/shared/alert-modal-service.service';
 import { CursosService } from '../cursos.service';
 
@@ -22,10 +21,12 @@ export class CursosFormComponent implements OnInit {
     private location: Location,
     private route: ActivatedRoute
   ) {
+    const curso = this.route.snapshot.data['curso'];
+
     this.form = this.fb.group({
-      id: [null],
+      id: [curso.id],
       nome: [
-        null,
+        curso.nome,
         [
           Validators.required,
           Validators.minLength(3),
@@ -36,6 +37,9 @@ export class CursosFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+    
+
     // this.route.params.subscribe(
     //   (params: any) => {
     //     const id = params['id'];
@@ -46,24 +50,24 @@ export class CursosFormComponent implements OnInit {
     //   }
     // )
 
-    this.route.params
-      .pipe(
-        map((params): any => params['id']),
-        switchMap((id) => this.cursosService.loadByID(id))
-      )
-      .subscribe((curso) => this.updateForm(curso));
+    // this.route.params
+    //   .pipe(
+    //     map((params): any => params['id']),
+    //     switchMap((id) => this.cursosService.loadByID(id))
+    //   )
+    //   .subscribe((curso) => this.updateForm(curso));
 
       // concatMap => Ordem da requisição importa, as requisições são feitas simultaneamente, mas a resposta é na ordem em que foi declarada
       // mergeMap => Ordem da requisição não importa e o retorno é baseado na que terminou primeiro
       // exhaustMap => Executa a primeira requisição, aguarda a resposta para seguir para o proximo
   }
 
-  updateForm(curso: any) {
-    this.form.patchValue({
-      id: curso.id,
-      nome: curso.nome,
-    });
-  }
+  // updateForm(curso: any) {
+  //   this.form.patchValue({
+  //     id: curso.id,
+  //     nome: curso.nome,
+  //   });
+  // }
 
   hasError(field: string) {
     return this.form.get(field)?.errors;
