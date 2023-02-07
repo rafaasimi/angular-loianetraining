@@ -5,12 +5,12 @@
       "nome": "Angular"
     },
     {
-      "nome": "React",
-      "id": 2
+      "id": 2,
+      "nome": "React"
     },
     {
-      "nome": "Vue",
-      "id": 3
+      "id": 3,
+      "nome": "Vue"
     }
   ]
 }

@@ -13,7 +13,7 @@ export class CursosService {
   constructor(private http: HttpClient) {}
 
   list() {
-    return this.http.get<Curso[]>(this.API).pipe(delay(1000), tap(console.log));
+    return this.http.get<Curso[]>(this.API).pipe(delay(500), tap(console.log));
   }
 
   loadByID(id: string) {
@@ -34,5 +34,9 @@ export class CursosService {
     } else {
       return this.create(curso);
     }
+  }
+
+  remove(id: number) {
+    return this.http.delete(`${this.API}/${id}`).pipe(take(1));
   }
 }
