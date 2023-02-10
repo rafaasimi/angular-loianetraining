@@ -2,7 +2,7 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AlertModalServiceService } from 'src/app/shared/alert-modal-service.service';
+import { AlertModalServiceService } from 'src/app/shared/alert-modal.service';
 import { CursosService } from '../cursos.service';
 
 @Component({
