@@ -5,6 +5,7 @@ import { catchError, EMPTY, Observable, of, Subject, switchMap, take } from 'rxj
 import { AlertModalServiceService } from 'src/app/shared/alert-modal.service';
 import { Curso } from '../curso';
 import { CursosService } from '../cursos.service';
+import { Cursos2Service } from '../cursos2.service';
 
 @Component({
   selector: 'app-cursos-lista',
@@ -22,7 +23,8 @@ export class CursosListaComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal: any;
 
   constructor(
-    private cursosService: CursosService,
+    // private cursosService: CursosService,
+    private cursos2Service: Cursos2Service,
     private alertService: AlertModalServiceService,
     private router: Router,
     private route: ActivatedRoute,
@@ -37,7 +39,7 @@ export class CursosListaComponent implements OnInit {
 
   onRefresh() {
     // Maneira 1
-    this.cursos$ = this.cursosService.list().pipe(
+    this.cursos$ = this.cursos2Service.list().pipe(
       catchError((error) => {
         console.log(error);
         this.handleError();
@@ -47,7 +49,7 @@ export class CursosListaComponent implements OnInit {
     );
 
     // Maneira 2
-    this.cursosService
+    this.cursos2Service
       .list()
       .pipe(
         catchError((error) => {
@@ -82,7 +84,7 @@ export class CursosListaComponent implements OnInit {
     result$.asObservable()
     .pipe(
       take(1),
-      switchMap(result => result ? this.cursosService.remove(curso.id!) : EMPTY)
+      switchMap(result => result ? this.cursos2Service.remove(curso.id!) : EMPTY)
     ).subscribe(
       (success) => {
         this.onRefresh();
@@ -98,7 +100,7 @@ export class CursosListaComponent implements OnInit {
   onConfirmDelete() {
     this.deleteModalRef?.hide();
     if (this.cursoSelecionado.id) {
-      this.cursosService.remove(this.cursoSelecionado.id).subscribe(
+      this.cursos2Service.remove(this.cursoSelecionado.id).subscribe(
         (success) => {
           this.onRefresh();
         },

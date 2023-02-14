@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { AlertModalServiceService } from 'src/app/shared/alert-modal.service';
 import { CursosService } from '../cursos.service';
+import { Cursos2Service } from '../cursos2.service';
 
 @Component({
   selector: 'app-cursos-form',
@@ -16,7 +17,8 @@ export class CursosFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private cursosService: CursosService,
+    // private cursosService: CursosService,
+    private cursos2Service: Cursos2Service,
     private alertModalService: AlertModalServiceService,
     private location: Location,
     private route: ActivatedRoute
@@ -80,7 +82,7 @@ export class CursosFormComponent implements OnInit {
         messageSuccess = 'Curso atualizado com sucesso.';
         messageError = 'Erro ao atualizar curso, tente novamente.'
       }
-        this.cursosService.save(this.form.value).subscribe(
+        this.cursos2Service.save(this.form.value).subscribe(
           (sucesso) => {
             this.alertModalService.showAlertSuccess(
               messageSuccess
