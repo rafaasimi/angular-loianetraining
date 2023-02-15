@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: 'cursos' },
+  { path: '', pathMatch: 'full', redirectTo: 'upload' },
   {
     path: 'cursos',
     loadChildren: () =>
@@ -14,6 +14,11 @@ const routes: Routes = [
       import('./unsubscribe-rxjs/unsubscribe-rxjs.module').then(
         (m) => m.UnsubscribeRxjsModule
       ),
+  },
+  {
+    path: 'upload',
+    loadChildren: () =>
+      import('./upload-file/upload-file.module').then((m) => m.UploadFileModule),
   },
 ];
 
