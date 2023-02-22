@@ -3,6 +3,10 @@
         <label for="formFile" class="form-label">Selecionar arquivo</label>
         <input class="form-control" type="file" id="formFile" (change)="onChange($event)" multiple>
     </div>
+
+    <div class="progress" role="progressbar" aria-label="Carregamento" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress-bar" [style.width]="progress + '%'">{{progress}}%</div>
+    </div>
 </div>
 
 <div style="margin-top: 10px">
