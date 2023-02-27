@@ -1,4 +1,4 @@
-<p align='center'><img width='300' src="./.github/angular.png"/></p>
+<p align='center'><img width='300' src="./.github/angular.svg"/></p>
 <h1 align='center'>Angular - Loiane.training</h1>
 
 ## 🔖 Descrição
